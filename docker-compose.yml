@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  # --- Database ---
+  postgres:
+    image: postgres:15
+    container_name: fixit_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+
+  # --- Backend API (Node + Express) ---
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: fixit_server
+    environment:
+      NODE_ENV: production
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      DB_PORT: ${DB_PORT}
+    depends_on:
+      - postgres
+    ports:
+      - "5050:${SERVER_PORT}"
+
+  # --- Frontend (React + NGINX) ---
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: fixit_client
+    depends_on:
+      - server
+    ports:
+      - "80:80"
+    restart: always
+
+volumes:
+  pg_data:
