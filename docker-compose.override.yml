@@ -4,20 +4,20 @@ services:
   server:
     environment:
       NODE_ENV: development
-    command: npm run dev       # use nodemon for live reload
+    command: npm run dev         # use nodemon for live reload
     volumes:
-      - ./server:/app          # mount local code
-      - /app/node_modules      # preserve container dependencies
+      - ./server:/app            # mount local code
+      - /app/node_modules        # preserve container dependencies
     ports:
-      - "5050:${SERVER_PORT}"
+      - "5050:5000"              # backend dev port
 
   client:
     build:
       context: ./client
       dockerfile: Dockerfile.dev
-    command: npm run dev       # run Vite in dev mode (hot reload)
+    command: npm run dev         # run Vite dev server
     volumes:
       - ./client:/app
       - /app/node_modules
     ports:
-      - "${CLIENT_PORT}:${CLIENT_PORT}"           # Vite default port
+      - "5173:5173"              # frontend dev port

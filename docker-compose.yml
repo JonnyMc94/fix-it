@@ -1,7 +1,6 @@
 version: "3.8"
 
 services:
-  # --- Database ---
   postgres:
     image: postgres:15
     container_name: fixit_db
@@ -10,12 +9,11 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5434:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
-    ports:
-      - "${DB_PORT}:${DB_PORT}"
 
-  # --- Backend API (Node + Express) ---
   server:
     build:
       context: ./server
@@ -27,13 +25,12 @@ services:
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
       DB_NAME: ${DB_NAME}
-      DB_PORT: ${DB_PORT}
+      DB_PORT: 5432
     depends_on:
       - postgres
     ports:
-      - "5050:${SERVER_PORT}"
+      - "5050:5000"
 
-  # --- Frontend (React + NGINX) ---
   client:
     build:
       context: ./client
