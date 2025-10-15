@@ -8,7 +8,7 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "types": [],
-    "module": "NodeNext",        // or "ESNext"
+    "module": "NodeNext", // or "ESNext"
     "moduleResolution": "NodeNext",
     "target": "ES2022",
     "esModuleInterop": true,
@@ -44,5 +44,10 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": false,
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }
