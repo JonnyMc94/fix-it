@@ -11,11 +11,9 @@ const sequelize = new Sequelize({
   host: process.env.DB_HOST!,
   port: Number(process.env.DB_PORT!),
   username: process.env.DB_USER!,
-  password: process.env.DB_PASSWORD!,
+  password: process.env.DB_PASS!,
   database: process.env.DB_NAME!,
   models: [ ManualModel, ProductsModel, UserSavedItemsModel, UserSearchesModel, UserModel ],
 });
-
-console.log('Sequelize instance initialized with models:', sequelize.models);
 
 export default sequelize;

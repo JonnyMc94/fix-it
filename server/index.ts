@@ -2,17 +2,17 @@ import express from 'express';
 import type { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import { Sequelize } from 'sequelize';
+import sequelize from './sequelize.ts';
 import dotenv from 'dotenv';
 
 // --------------------
 // Environment Variables
 // --------------------
 const PORT = process.env.PORT || 8080;
-const DB_NAME = process.env.DB_NAME || 'fixitdb';
-const DB_USER = process.env.DB_USER || 'postgres';
-const DB_PASS = process.env.DB_PASS || 'postgres';
-const DB_HOST = process.env.DB_HOST || 'localhost';
+const DB_NAME = process.env.DB_NAME;
+const DB_USER = process.env.DB_USER;
+const DB_PASS = process.env.DB_PASS;
+const DB_HOST = process.env.DB_HOST;
 
 // --------------------
 // Initialize Express
@@ -30,15 +30,17 @@ app.use(morgan('dev'));
 // --------------------
 // Initialize Sequelize
 // --------------------
-const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
-  host: DB_HOST,
-  dialect: 'postgres',
-});
-
 // Test DB connection
 sequelize.authenticate()
   .then(() => console.log('✅ Database connected'))
   .catch(err => console.error('❌ Database connection failed:', err));
+
+sequelize.sync()
+  .then(() => console.log('✅ Database synchronized'))
+  .catch(err => console.error('❌ Database synchronization failed:', err));
+
+console.log('Sequelize instance initialized with models:', sequelize.models);
+
 
 // --------------------
 // Routes

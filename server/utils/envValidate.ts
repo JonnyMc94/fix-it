@@ -3,7 +3,7 @@ dotenv.config({ path: '.env.local' });
 
 const requiredVars = [
   'DB_USER',
-  'DB_PASSWORD',
+  'DB_PASS',
   'DB_NAME',
   'DB_PORT',
   'DB_HOST',
