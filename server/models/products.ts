@@ -11,7 +11,7 @@ export class ProductsModel extends Model<ProductsModel> implements Products {
                 type: DataType.UUID,
                 defaultValue: DataType.UUIDV4
         })
-        id!: number;
+        id!: string;
 
         @Column({
                 type: DataType.STRING,

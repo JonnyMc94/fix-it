@@ -11,23 +11,23 @@ export class UserSavedItemsModel extends Model<UserSavedItemsModel> implements U
                 type: DataType.UUID,
                 defaultValue: DataType.UUIDV4
         })
-        id!: number;
+        id!: string;
 
         @Column({
                 type: DataType.UUID,
                 allowNull: false
         })
-        user_id!: number;
+        user_id!: string;
 
         @Column({
                 type: DataType.UUID,
         })
-        manual_id!: number;
+        manual_id!: string;
 
         @Column({
                 type: DataType.UUID,
         })
-        fix_id!: number;
+        fix_id!: string;
 
         @Column({
                 type: DataType.DATE,

@@ -11,13 +11,13 @@ export class UserSearchesModel extends Model<UserSearchesModel> implements User_
                 type: DataType.UUID,
                 defaultValue: DataType.UUIDV4
         })
-        id!: number;
+        id!: string;
 
         @Column({
                 type: DataType.UUID,
                 allowNull: false
         })
-        user_id!: number;
+        user_id!: string;
 
         @Column({
                 type: DataType.TEXT,
@@ -34,7 +34,7 @@ export class UserSearchesModel extends Model<UserSearchesModel> implements User_
                 type: DataType.UUID,
                 allowNull: false
         })
-        identified_product_id!: number;
+        identified_product_id!: string;
 
         @Column({
                 type: DataType.DATE,

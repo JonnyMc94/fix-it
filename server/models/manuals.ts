@@ -11,13 +11,13 @@ export class ManualModel extends Model<ManualModel> implements Manual {
                 type: DataType.UUID,
                 defaultValue: DataType.UUIDV4
         })
-        id!: number;
+        id!: string;
 
         @Column({
                 type: DataType.UUID,
                 allowNull: false
         })
-        product_id!: number;
+        product_id!: string;
 
         @Column({
                 type: DataType.STRING,

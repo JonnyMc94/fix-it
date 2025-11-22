@@ -1,6 +1,6 @@
 export type Manual = {
-    id: number;
-    product_id: number;
+    id: string;
+    product_id: string;
     title: string;
     file_url: string;
     source_url: string;

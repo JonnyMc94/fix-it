@@ -11,7 +11,7 @@ export class UserModel extends Model<UserModel> implements IUser {
                 type: DataType.UUID,
                 defaultValue: DataType.UUIDV4
         })
-        id!: number;
+        id!: string;
 
         @Column({
                 type: DataType.STRING,

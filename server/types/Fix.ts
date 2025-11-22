@@ -1,6 +1,6 @@
 export type Fix = {
-    id: number;
-    product_id: number;
+    id: string;
+    product_id: string;
     title: string;
     description: string;
     steps: string;
