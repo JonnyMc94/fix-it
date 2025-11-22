@@ -1,82 +1,43 @@
-import sequelize from '../sequelize.ts';
-import { ManualModel, ProductsModel, UserSavedItemsModel, UserSearchesModel, UserModel, FixesModel  } from '../models/index.ts';
+import 'dotenv/config';
+import crypto from 'crypto';
+import sequelize from '../sequelize.ts'; 
+import { UserModel, ProductsModel, ManualModel, FixesModel, UserSavedItemsModel, UserSearchesModel } from '../models/index.ts';
+import { users, products, manuals, fixes, userSavedItems, userSearches } from './data/index.ts';
 
-async function seed() {
+async function run() {
   try {
+    console.log('Connecting to DB...');
     await sequelize.authenticate();
-    console.log('Connected. Seeding data...');
+    console.log('Connected.');
 
-    await UserModel.bulkCreate([
-      {
-        id: crypto.randomUUID(),
-        name: 'Jonathan',
-        email: 'jon@example.com',
-        password_hash: 'hashed123'
-      }
-    ]);
+    // Dev-only: force recreate all tables
+    console.log('Syncing DB (force: true) — this will drop existing tables in dev!');
+    await sequelize.sync({ force: true });
 
-    await ProductsModel.bulkCreate([
-      {
-        id: crypto.randomUUID(),
-        name: 'Dyson Vacuum',
-        brand: 'Dyson',
-        model_number: 'DX100',
-        category: 'Appliances',
-        image_url: 'https://example.com/dyson.png'
-      }
-    ]);
+    console.log('Inserting users...');
+    await UserModel.bulkCreate(users as any);
 
-    await ManualModel.bulkCreate([
-      {
-        id: crypto.randomUUID(),
-        name: 'Dyson Vacuum',
-        brand: 'Dyson',
-        model_number: 'DX100',
-        category: 'Appliances',
-        image_url: 'https://example.com/dyson.png'
-      }
-    ]);
+    console.log('Inserting products...');
+    await ProductsModel.bulkCreate(products as any);
 
-    await UserSavedItemsModel.bulkCreate([
-      {
-        id: crypto.randomUUID(),
-        name: 'Dyson Vacuum',
-        brand: 'Dyson',
-        model_number: 'DX100',
-        category: 'Appliances',
-        image_url: 'https://example.com/dyson.png'
-      }
-    ]);
+    console.log('Inserting manuals...');
+    await ManualModel.bulkCreate(manuals as any);
 
-    await UserSearchesModel.bulkCreate([
-      {
-        id: crypto.randomUUID(),
-        name: 'Dyson Vacuum',
-        brand: 'Dyson',
-        model_number: 'DX100',
-        category: 'Appliances',
-        image_url: 'https://example.com/dyson.png'
-      }
-    ]);
+    console.log('Inserting fixes...');
+    await FixesModel.bulkCreate(fixes as any);
 
-    await FixesModel.bulkCreate([
-      {
-        id: crypto.randomUUID(),
-        name: 'Dyson Vacuum',
-        brand: 'Dyson',
-        model_number: 'DX100',
-        category: 'Appliances',
-        image_url: 'https://example.com/dyson.png'
-      }
-    ]);
+    console.log('Inserting saved items...');
+    await UserSavedItemsModel.bulkCreate(userSavedItems as any);
 
-    console.log('Seed complete!');
+    console.log('Inserting user searches...');
+    await UserSearchesModel.bulkCreate(userSearches as any);
+
+    console.log('Seed complete ✅');
     process.exit(0);
-
   } catch (err) {
-    console.error(err);
+    console.error('Seed failed:', err);
     process.exit(1);
   }
 }
 
-seed();
+run();

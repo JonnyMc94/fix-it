@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec ts-node-esm index.ts",
-    "dev": "nodemon --exec node --loader ts-node/esm index.ts"
+    "dev": "nodemon --exec node --loader ts-node/esm index.ts",
+    "seed": "node --loader ts-node/esm ./seed/seed.ts"
   },
   "keywords": [],
   "author": "",
