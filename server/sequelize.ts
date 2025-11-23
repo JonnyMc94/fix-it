@@ -1,9 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
 import { validateEnv } from './utils/envValidate.ts';
-// import { User } from './models/user';
-// import { Message } from './models/message';
-// import { Conversations } from './models/conversations';
+import { ManualModel, ProductsModel, UserSavedItemsModel, UserSearchesModel, UserModel, FixesModel } from './models/index.ts'
 
 dotenv.config({ path: '.env.local' });
 validateEnv()
@@ -13,11 +11,9 @@ const sequelize = new Sequelize({
   host: process.env.DB_HOST!,
   port: Number(process.env.DB_PORT!),
   username: process.env.DB_USER!,
-  password: process.env.DB_PASSWORD!,
+  password: process.env.DB_PASS!,
   database: process.env.DB_NAME!,
-  // models: [User, Message, Conversations],
+  models: [ ManualModel, ProductsModel, UserSavedItemsModel, UserSearchesModel, UserModel, FixesModel ],
 });
-
-console.log('Sequelize instance initialized with models:', sequelize.models);
 
 export default sequelize;

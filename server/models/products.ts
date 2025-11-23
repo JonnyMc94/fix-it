@@ -1,11 +1,11 @@
 import { Model, Column, DataType, Table, PrimaryKey, HasMany } from "sequelize-typescript";
-import type { User as IUser } from '../types/User.ts'
+import type { Products } from '../types/Products.ts'
 
 @Table({
-    tableName: "users",
+    tableName: "products",
     timestamps: true,
 })
-export class UserModel extends Model<UserModel> implements IUser {
+export class ProductsModel extends Model<ProductsModel> implements Products {
         @PrimaryKey
         @Column({
                 type: DataType.UUID,
@@ -23,13 +23,25 @@ export class UserModel extends Model<UserModel> implements IUser {
                 type: DataType.STRING,
                 allowNull: false
         })
-        email!: string;
+        brand!: string;
 
         @Column({
                 type: DataType.STRING,
                 allowNull: false
         })
-        password_hash!: string;
+        model_number!: string;
+
+        @Column({
+                type: DataType.STRING,
+                allowNull: false
+        })
+        category!: string;
+
+        @Column({
+                type: DataType.STRING,
+                allowNull: false
+        })
+        image_url!: string;
 
         @Column({
                 type: DataType.DATE,
@@ -37,9 +49,5 @@ export class UserModel extends Model<UserModel> implements IUser {
         })
         created_at!: Date;
 
-        @Column({
-                type: DataType.DATE,
-        })
-        updated_at!: Date;
 }
 
