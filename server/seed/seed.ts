@@ -1,4 +1,4 @@
-import 'dotenv/config';
+// import 'dotenv';
 import crypto from 'crypto';
 import sequelize from '../sequelize.ts'; 
 import { UserModel, ProductsModel, ManualModel, FixesModel, UserSavedItemsModel, UserSearchesModel } from '../models/index.ts';
