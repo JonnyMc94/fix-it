@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 // --------------------
 // Environment Variables
 // --------------------
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 const DB_NAME = process.env.DB_NAME;
 const DB_USER = process.env.DB_USER;
 const DB_PASS = process.env.DB_PASS;
@@ -45,13 +45,13 @@ console.log('Sequelize instance initialized with models:', sequelize.models);
 // --------------------
 // Routes
 // --------------------
+import productsRouter from './routes/products.ts';
+
 app.get('/', (req: Request, res: Response) => {
   res.send('FixIt server is running!');
 });
 
-// Example route structure
-// app.use('/auth', require('./routes/auth'));  // add your auth routes
-// app.use('/fixes', require('./routes/fixes')); // add your fixes routes
+app.use('/products', productsRouter);
 
 // --------------------
 // Global Error Handler
